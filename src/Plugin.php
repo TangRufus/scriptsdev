@@ -8,13 +8,20 @@ class Plugin implements PluginInterface
 {
 	public function activate(Composer $composer, IOInterface $io)
 	{
-		$config = json_decode(file_get_contents(getcwd() . '/composer.json'), true);
-		if (!in_array('--no-dev', $_SERVER['argv']) && isset($config['scripts-dev'])) {
-			$scripts = array_merge_recursive(
-				$composer->getPackage()->getScripts(),
-				$config['scripts-dev']
-			);
-			$composer->getPackage()->setScripts($scripts);
+		if (in_array('--no-dev', $_SERVER['argv'])) {
+			return;
 		}
+
+		$extra = $composer->getPackage()->getExtra();
+		if (empty($extra['scripts-dev'])) {
+			return;
+		}
+
+		$scripts = array_merge_recursive(
+			$composer->getPackage()->getScripts(),
+			$extra['scripts-dev']
+		);
+
+		$composer->getPackage()->setScripts($scripts);
 	}
 }

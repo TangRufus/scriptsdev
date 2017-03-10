@@ -8,8 +8,15 @@
   "authors": [
     {
       "name": "Vitaliy Krasnoperov",
-      "email": "alistar.neron@gmail.com"
-    }
+      "email": "alistar.neron@gmail.com",
+			"role": "Maintainer"
+    },
+		{
+			"name": "Tang Rufus",
+			"email": "tangrufus@gmail.com",
+			"homepage": "https://www.typist.tech",
+			"role": "Contributor"
+		}
   ],
   "autoload": {
     "psr-0": {
